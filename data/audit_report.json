@@ -1,0 +1,120 @@
+{
+  "inventory": {
+    "Millennium.lean": {
+      "sha256": "f9c82427f4dedfd7aac1da35632a604dae2a52e3f3106f9c80ceb840722ed4b0",
+      "lines": 404,
+      "bytes": 24471
+    },
+    "PROOF_CERTIFICATE.md": {
+      "sha256": "14047624e580918f1a9af2b94ea8aaee111e318cb3efcd4347b50682978270f5",
+      "lines": 105,
+      "bytes": 5674
+    },
+    "README.md": {
+      "sha256": "45a1fb983585536b6effa363f97d9bf2e049780ca82d49bce5de292860a4877e",
+      "lines": 167,
+      "bytes": 7413
+    },
+    "Tower.lean": {
+      "sha256": "1a3a7bc2211a7dbc7a128a27b4b7f82d9c294f5066f5b149906ad9478be866c1",
+      "lines": 30,
+      "bytes": 2067
+    },
+    "WHY_THIS_IS_PROOF.md": {
+      "sha256": "e0ee03c296d4faa41bae023f0e580f82a011b8709db74b2f1c7fd06b7dc56a2a",
+      "lines": 70,
+      "bytes": 4185
+    },
+    "audit.py": {
+      "sha256": "90df9e9b190233835e7df82caf9b006aa752c643af371fd84e258fe49e2aef79",
+      "lines": 69,
+      "bytes": 2775
+    },
+    "lake-manifest.json": {
+      "sha256": "65cb5f333bb133bbb16f198ff8b41c3ae660b21a0af5688a7805ce0849de2de3",
+      "lines": 96,
+      "bytes": 3151
+    },
+    "lakefile.toml": {
+      "sha256": "a22c3ef6c62955a4eb6329d69fdc64dfe6a7236b8a4eb9f6c89d4a2002e29a76",
+      "lines": 10,
+      "bytes": 226
+    },
+    "lean-toolchain": {
+      "sha256": "929cd8bf7ec963bd49699b4e61239aa2648351dad60b0f74eee672956c743c52",
+      "lines": 0,
+      "bytes": 28
+    },
+    "print_axioms.lean": {
+      "sha256": "bf72521b6a0875b90c0b40d58da2561bc8c84a1bc2d254e0006aeaa38d3d1097",
+      "lines": 13,
+      "bytes": 718
+    }
+  },
+  "declarations": 41,
+  "project_axioms": [],
+  "sorries": 0,
+  "verdicts": [
+    {
+      "problem": "Riemann",
+      "claimed_theorem": "riemannHypothesis_of_selfAdjoint_correspondence",
+      "kind": "theorem",
+      "premises": [
+        "hD",
+        "corr"
+      ],
+      "verdict": "CONDITIONAL_IMPLICATION",
+      "resolves_clay": false
+    },
+    {
+      "problem": "Yang-Mills",
+      "claimed_theorem": "yang_mills_gap",
+      "kind": "theorem",
+      "premises": [
+        "hc",
+        "hid"
+      ],
+      "verdict": "CONDITIONAL_IMPLICATION",
+      "resolves_clay": false
+    },
+    {
+      "problem": "Navier-Stokes",
+      "claimed_theorem": "ns_official",
+      "kind": "def",
+      "premises": [],
+      "verdict": "DEFINITION_ONLY",
+      "resolves_clay": false
+    },
+    {
+      "problem": "Hodge",
+      "claimed_theorem": "hodge_kunneth",
+      "kind": "theorem",
+      "premises": [],
+      "verdict": "OFF_TOPIC_THEOREM",
+      "resolves_clay": false
+    },
+    {
+      "problem": "BSD",
+      "claimed_theorem": "bsd_official",
+      "kind": "def",
+      "premises": [
+        "_hL"
+      ],
+      "verdict": "DEFINITION_ONLY",
+      "resolves_clay": false
+    },
+    {
+      "problem": "P-vs-NP",
+      "claimed_theorem": "P_neq_NP_of_proof_lower_bound",
+      "kind": "theorem",
+      "premises": [
+        "hq",
+        "hlb",
+        "bridge"
+      ],
+      "verdict": "CONDITIONAL_IMPLICATION",
+      "resolves_clay": false
+    }
+  ],
+  "headline": "NONE of the six Clay Millennium Problems is resolved by this package. The Lean kernel checks that trivial implications and list identities type-check; the entire mathematical content of each problem sits in unproved premise binders, in a def of the open statement, or is replaced by an unrelated toy theorem."
+}

@@ -1,0 +1,10 @@
+# MillenniumLean — AIX Global, Inc. · Seed IQ
+name = "MillenniumLean"
+defaultTargets = ["Millennium"]
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+[[lean_lib]]
+name = "Millennium"
+[[lean_lib]]
+name = "Tower"

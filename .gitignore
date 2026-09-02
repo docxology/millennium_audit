@@ -1,0 +1,17 @@
+.venv/
+.lake/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+package/MillenniumLean/.lake/
+output/web/
+output/slides/
+output/reports/
+output/pdf/*_compile.log
+*.olean
+*.ilean
+*.aux
+*.bbl
+*.blg
+*.toc
+*.log

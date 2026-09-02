@@ -1,0 +1,53 @@
+{
+  "schema": "millennium-audit-facts-v1",
+  "description": "Measured facts from the Millennium_Audit session (2026-09-01). Every value here was directly measured or executed in-session; see data/BUILD_RECEIPT.md, data/audit_report.json, and docs/audit/00_INDEX.md for provenance.",
+  "package_inventory": {
+    "package_file_count": 11,
+    "package_bytes_total": 50708,
+    "millennium_lean_lines": 404,
+    "tower_lean_lines": 30,
+    "declaration_count": 41,
+    "live_sorry_count": 0,
+    "project_axiom_count": 0
+  },
+  "lean_reproduction": {
+    "toolchain": "leanprover/lean4:v4.34.0-rc1",
+    "mathlib_pinned_rev": "d0be1efe9afff6119115373bf4ea5abd833b3a95",
+    "olean_files_restored": 8711,
+    "build_jobs": 8730,
+    "build_exit": 0,
+    "axioms_exit": 0
+  },
+  "audit_self_verification": {
+    "quote_lines_checked": 259,
+    "quote_divergences_final": 0,
+    "quote_divergences_first_draft": 51,
+    "test_count": 15
+  },
+  "verdict_counts": {
+    "conditional_implication": 3,
+    "definition_only": 2,
+    "off_topic_theorem": 1,
+    "problems_resolved": 0
+  },
+  "lean_source_line_anchors": {
+    "tower_declInv": 11,
+    "tower_base_certificate": 12,
+    "tower_universal": 15,
+    "tower_poincare_control": 26,
+    "millennium_yang_mills_gap": 84,
+    "millennium_hodge_kunneth": 45,
+    "millennium_riemann_final": 70,
+    "millennium_pvsnp_final": 324,
+    "millennium_ns_official": 254,
+    "millennium_bsd_official": 209
+  },
+  "publication": {
+    "doi": "10.5281/zenodo.22243473",
+    "doi_url": "https://doi.org/10.5281/zenodo.22243473",
+    "zenodo_record": "https://zenodo.org/records/22243473",
+    "concept_doi": "10.5281/zenodo.22243472",
+    "deposition_files": 21,
+    "published": "2026-09-01"
+  }
+}

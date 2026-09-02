@@ -1,0 +1,38 @@
+{
+  "title": "Forensic Audit of the MillenniumLean Clay-Proof Package (AIX Global)",
+  "description": "<p>Statement-level forensic audit of the MillenniumLean package (AIX Global, Zenodo 10.5281/zenodo.22226553), which claims kernel-checked Lean 4 proofs of the six remaining Clay Millennium Problems. The audit independently reproduces every kernel-hygiene claim (clean build, zero sorry, zero project axioms, axiom footprints within the classical trio) under the pinned toolchain leanprover/lean4:v4.34.0-rc1 and mathlib revision d0be1efe9a, then audits what the theorem types actually say against the official Clay statements. Verdict: the package resolves none of the six problems. Findings F01-F14: the claimed final theorems are conditional implications whose unproved premise binders carry the open problems (Riemann, Yang-Mills, P vs NP), definitions of the open statements (Navier-Stokes, BSD), or true theorems about unrelated objects (Hodge: a list identity); the universalization tower proves only 0 &lt; n + 1. All 259 quoted lines verified byte-exact against the package; a three-lane hostile red-team pass was run on the audit itself before publication.</p><p>Code MIT licensed. This record is the publication archive for <a href='https://github.com/docxology/millennium_audit'>github.com/docxology/millennium_audit</a>.</p>",
+  "upload_type": "publication",
+  "publication_type": "report",
+  "creators": [
+    {
+      "name": "Friedman, Daniel Ari",
+      "affiliation": "Active Inference Institute",
+      "orcid": "0000-0001-6232-9096"
+    }
+  ],
+  "license": "mit",
+  "access_right": "open",
+  "version": "1.0.0",
+  "keywords": [
+    "Lean 4",
+    "formal verification",
+    "Millennium Prize Problems",
+    "claim audit",
+    "adversarial review",
+    "evidence-first",
+    "Hilbert-Polya",
+    "proof-assistant forensics"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/docxology/millennium_audit",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "10.5281/zenodo.22226553",
+      "relation": "references",
+      "scheme": "doi"
+    }
+  ]
+}
