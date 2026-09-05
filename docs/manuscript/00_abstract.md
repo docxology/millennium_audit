@@ -8,7 +8,7 @@ under the pinned toolchain (leanprover/lean4:v4.34.0-rc1; mathlib at the
 manifest-pinned revision d0be1efe9a), and compared each claimed final theorem
 against the official Clay problem statements.
 
-Findings are itemized as fourteen one-per-finding reports (docs/audit/), each
+Findings are itemized as twenty-two one-per-finding reports (docs/audit/), each
 quoting the package verbatim with line anchors and recording the probe that
 backs the verdict. The kernel claims are TRUE and reproduce byte-for-byte:
 clean build, zero live `sorry`, zero project axioms, axiom footprints inside
@@ -24,7 +24,8 @@ what those outputs are claimed to demonstrate.
 
 **Publication.** This report is published as a Zenodo record
 (DOI 10.5281/zenodo.22243473) together with the complete evidence bundle -
-all fourteen findings, the audit doctrine, the kernel reproduction receipt,
+all twenty-two findings (F01-F14 original pass; F15-F22 the 2026-09-04
+rebuttal-response pass), the audit doctrine, the kernel reproduction receipt,
 and the machine-readable audit report. The public paper copy with the
 rendered PDF and full text lives in the docxology repository
 (github.com/docxology/docxology, papers/2026_MillenniumAudit). The standalone repository for this audit is github.com/docxology/millennium_audit.

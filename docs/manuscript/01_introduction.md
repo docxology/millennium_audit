@@ -23,10 +23,10 @@ Three commitments govern everything below.
 1. **No kernel fact is disputed.** We reproduce the build and axiom report
    independently (Section 2; finding F01) and they match the package
    byte-for-byte.
-2. **Every refutation is quote-anchored.** Each of the fourteen findings
-   (docs/audit/F01-F14) quotes the package's own source lines, with file:line
-   verified character-against the extracted tree by a script (259/259 quoted
-   lines verify byte-exact).
+2. **Every refutation is quote-anchored.** Each of the twenty-two findings
+   (docs/audit/F01-F22) quotes the package's own source lines, with file:line
+   verified character-against the extracted tree by a script (292/292 quoted
+   lines verify byte-exact, including the rebuttal pass).
 3. **Genuine content is credited.** Finding F13 itemizes the package's real
    theorems and faithful formalizations; the verdict rests on what is absent,
    not on denying what is present.

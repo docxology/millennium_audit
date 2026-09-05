@@ -14,7 +14,10 @@ wider literature is outside this audit's evidence base. (The package does
 contain genuine small theorems and faithful formalizations - itemized with
 credit in F13.) The package's mathematical content is
 carried by unproved premise binders, defs of open statements, and the trivial
-tower invariant `0 < n + 1`.
+tower invariant `0 < n + 1`. A rebuttal-response pass (2026-09-04, F15-F22) re-verified the
+audit against the md5-pinned Zenodo deposit after the authors' LinkedIn rebuttal: the paper's
+Section-4 `*_final` theorems and `gftqc_*` certificates do not exist in the published,
+kernel-checkable package; the headline verdict is unchanged.
 
 | # | Finding | Verdict tag | One-line summary |
 |---|---------|-------------|------------------|
@@ -32,7 +35,14 @@ tower invariant `0 < n + 1`.
 | F12 | Klein/ZMod-12 and theta-gap theorems | OFF_TOPIC (real but unrelated) | True finite arithmetic, no Clay content |
 | F13 | Genuine real content in the package | CONFIRMED (fair credit) | Small true mathlib-anchored lemmas, itemized |
 | F14 | External context: FTQC claim record | CONFIRMED (third-party) | Companion paper's claims publicly demolished |
-
+| F15 | Rebuttal pass: the six `*_final` theorems | REFUTES HEADLINE | Paper §4's closed finals exist only as prose; package census has none |
+| F16 | Paper §4 Lean block vs package types | REFUTES HEADLINE | Block needs 22 undeclared identifiers; Hodge/NS/ YM consumption impossible as typed |
+| F17 | "Named consumed certificates" are axioms | REFUTES HEADLINE | Kernel receipt: consumed certificates print in `#print axioms` (F17 probe) |
+| F18 | ComplexityModel junk instantiation | REFUTES HEADLINE | Junk model yields closed zero-axiom P≠NP |
+| F19 | `Promote.tower_closes` proves any declared target | CONFIRMED (content-free) | Junk-tower receipt; the "corrected" mechanism is plumbing too |
+| F20 | Division of labor: certificates must ship | REFUTES HEADLINE | Architecture conceded; the verifiable layer ships zero certificate terms |
+| F21 | `gftqc_corr` ≡ the Hilbert–Pólya binder | REFUTES HEADLINE | Paper's 7.1 is the package's unproved `corr` premise (F07); no term ships |
+| F22 | Rebuttal census + requirements on a responsive deposit | REFUTES HEADLINE (as of pinned md5) | Per-problem absence table + kernel-falsifiable checklist |
 Method note: every finding file pairs (a) the claim under audit, (b) verbatim
 quotation(s), (c) a probe actually run this session, (d) fair analysis
 including what is genuinely real, (e) a verdict tag
@@ -120,3 +130,59 @@ in-session receipt and the package SHA-256 pins rather than a git baseline.
 
 Post-correction gate: 259/259 quotes byte-exact (re-run via the committed
 script), 15/15 tests pass.
+
+## Rebuttal-pass receipt (2026-09-04, F15-F22)
+
+Trigger: the authors' LinkedIn rebuttal (D. Ovseyenko, 2026-09-04) states the audit attributed the
+proofs to the generic tower machinery, and points to the paper's Section-4 closed finals
+(`riemann_final` … `p_neq_np_final`) consuming named `gftqc_*` certificates.
+
+Probes run this session (all in-session, receipts inside the finding files):
+
+- **Artifact identity:** audited zip md5 `99df5b03a4798bfe543b03f525face13` equals the file md5
+  listed on the live Zenodo record 22226553 (v2, published 2026-09-01) — the audited artifact is
+  the currently published one; all compared zip members byte-identical to `package/MillenniumLean/`
+  (SHA-256, 7 files).
+- **Identifier census:** `gftqc`, `_final`, `StandardComplexityModel` — 0 occurrences in the
+  package (all .lean and .md); full declaration census 41 declarations, none named `*_final`/
+  `gftqc_*`; the only `Official*` is the field `OfficialTarget` (Millennium.lean:360).
+- **Lean probes (lake env lean, Lean 4.34.0-rc1, pinned mathlib, exit 0):** (1) junk
+  ComplexityModel yields a closed zero-axiom `P_neq_NP` (F18); (2) named certificates consumed by
+  a closed final print as axioms — `[gftqc_bridge, gftqc_hlb, propext, Classical.choice,
+  Quot.sound]` (F17); (3) a junk `PromotableTower` closes any declared target via
+  `Promote.tower_closes` (F19).
+- **Mathlib census at pinned revision:** zero `Chow` files; no Hodge-conjecture statement object
+  (only incidental p-adic Hodge–Tate mentions) — F16.
+- **Paper text:** v1.0 PDF (md5 6005a74c3db1d3d729263996e395f6e3, matching the live record)
+  fetched and text-extracted; §4 block and §7.1/§10/§11 quotations in F15/F16/F21 are from the
+  published PDF text.
+
+Scope discipline preserved: no kernel output of the package is disputed; the quantum-layer claims
+remain quarantined as context (F14 policy); the audit is strictly Lean-artifact-level, per the
+audit scope. The paper's Section-4 block is quoted from PDF text extraction (ligatures normalized);
+the package census and Lean probes are byte/exit-0 receipts.
+
+## Red-team refute-pass receipt (2026-09-04/05, F15-F22)
+
+Five adversarial lanes (scout workers, no edit rights) were dispatched to REFUTE the new findings;
+each re-ran its assigned checks independently. Result: **F15-F22 all SURVIVE**, zero findings
+refuted, no kernel facts disputed, no overstatement found. Receipts:
+
+- refute#1 (F15): md5 identity re-verified via Zenodo API (v2 = 22226553, md5 99df5b03…, 22141 B;
+  concept's earlier version = record 22225697, md5 c20731d652568a954afe1c66b45df1b3, 21450 B);
+  grep census 0 hits; 41 declarations; endpoint table vs README:7-14 and print_axioms.lean:8-13 —
+  all reproduced. Stronger than claimed: ALL TEN zip members SHA-256-identical (finding said
+  seven compared). Applied.
+- refute#2 (F16): PDF quotations verbatim; Fraisse.lean hit identified as the surname "Hodges"
+  (strengthens the mathlib-absence point) — applied; ComplexityModel/P_neq_NP-exist note applied.
+- refute#3 (F17): Lean probe re-run, exit 0, footprint byte-identical; named-certificate
+  dichotomy confirmed exhaustive; anonymous-inline-term caveat added to the finding.
+- refute#4 (F18, F19): full lake build (8729 jobs) + probe re-run, exit 0, outputs byte-identical;
+  no overstatement (neither claims impossibility of a faithful instance — only its absence from
+  the deposit).
+- refute#5 (F20/F21/F22): README:147-149 byte-faithful; census table row-by-row confirmed;
+  F22 falsifiability claim softened (items 1-3 kernel-checkable; 4-5 by inspection/build) —
+  applied; gftqc_hodge_algebraic/gftqc_hodge dual-naming and hL/_hL nits recorded in F22.
+
+Post-refute gate: 292/292 quotes byte-exact, 15/15 tests pass, orchestrator re-run reproduces
+data/audit_report.json identically.
