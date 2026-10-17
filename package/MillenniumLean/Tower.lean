@@ -1,3 +1,6 @@
+module
+
+@[expose] public section
 /-  MillenniumLean — AIX Global, Inc. · Seed IQ™ (Adaptive Multiagent Autonomous Control platform)
     Companion machine-checked certificate layer to
     "Demonstrating Quantum Value by Solving the Six Remaining Clay Millennium Problems"

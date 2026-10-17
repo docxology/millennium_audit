@@ -1,11 +1,14 @@
+module
 /-  MillenniumLean — AIX Global, Inc. · Seed IQ™ (Adaptive Multiagent Autonomous Control platform)
     Companion machine-checked certificate layer to
     "Demonstrating Quantum Value by Solving the Six Remaining Clay Millennium Problems"
     (D. Holt and D. Ovseyenko, AIX Global, 2026). DOI: 10.5281/zenodo.22179463
     © 2026 AIX Global Innovations, Inc. All rights reserved. Verification is unrestricted. -/
 
-import Mathlib
-import Tower
+public import Mathlib
+public import Tower
+
+@[expose] public section
 /-  Millennium — the six Clay problems, PROVED and machine-checked against mathlib.
     Riemann, Yang–Mills mass gap, Navier–Stokes, Hodge, Birch–Swinnerton-Dyer, P vs NP.
     Builds clean: 0 sorry, 0 project axiom (foundational propext / Classical.choice / Quot.sound only).

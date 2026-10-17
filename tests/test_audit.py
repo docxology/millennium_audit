@@ -47,7 +47,7 @@ def test_package_files_present(store):
 
 
 def test_toolchain_pinned(store):
-    assert store.read("lean-toolchain").strip() == "leanprover/lean4:v4.34.0-rc1"
+    assert store.read("lean-toolchain").strip() == "leanprover/lean4:v4.35.0"
 
 
 # ---------- kernel hygiene (their claims, independently re-derived) ----------
