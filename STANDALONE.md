@@ -21,11 +21,12 @@ universalization tower proves only `0 < n + 1` (F02).
 
     python3 scripts/run_audit.py           # report + data/audit_report.json
     python3 scripts/check_quotations.py    # 259/259 byte-exact quotation gate
-    .venv/bin/python -m pytest tests/ -q   # 15 tests, no mocks
+    python3 -m pytest tests/ -q            # 15 tests, no mocks
 
 The Lean kernel reproduction requires the pinned toolchain
-(leanprover/lean4:v4.34.0-rc1) and mathlib at manifest revision d0be1efe9a;
-see data/BUILD_RECEIPT.md for the completed receipt.
+(leanprover/lean4:v4.35.0) and mathlib at manifest revision 56a005855e;
+data/BUILD_RECEIPT.md records the completed 2026-09-01 session under the
+earlier v4.34.0-rc1 pin.
 
 **Publication.** Zenodo DOI 10.5281/zenodo.22243473 carries the rendered PDF
 and the complete evidence bundle. `CITATION.cff` and `.zenodo.json` carry the

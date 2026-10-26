@@ -20,7 +20,7 @@ identity). The universalization tower proves only `0 < n + 1`.
 
 | Path | Contents |
 |------|----------|
-| `docs/audit/` | 14 itemized findings (F01-F14), each quote-anchored to the package |
+| `docs/audit/` | 22 itemized findings (F01-F22), each quote-anchored to the package |
 | `docs/approach/` | Audit doctrine and method |
 | `docs/manuscript/` | Research manuscript (rendered: `output/pdf/`) |
 | `package/MillenniumLean/` | The audited artifact, verbatim (evidence; do not modify) |
