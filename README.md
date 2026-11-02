@@ -6,7 +6,7 @@ package claiming kernel-checked proofs of the six remaining Clay Millennium
 Problems.
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22243473-blue)](https://doi.org/10.5281/zenodo.22243473)
-[![Tests](https://img.shields.io/badge/tests-15%2F15-brightgreen)]()
+**Tests:** 15/15 passing (snapshot figure; this repository runs no CI workflow).
 
 **Verdict: the package resolves none of the six problems.** Its kernel claims
 are true and independently reproduced (clean build, zero `sorry`, zero project
