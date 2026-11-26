@@ -1,7 +1,7 @@
 # manuscript/
 
-Research manuscript source, rendered by the template pipeline
-(`uv run python scripts/pipeline/stage_03_render.py --project working/Millennium_Audit`).
+Maintained manuscript source with [configuration](config.yaml) and
+[bibliography](references.bib). Follow the [pinned render commands](../reproduce.md).
 
 | Section | Contents |
 |---------|----------|
@@ -14,5 +14,5 @@ Research manuscript source, rendered by the template pipeline
 | `06_scope_and_related_work.md` | What the audit is and is not; related formalization efforts |
 | `07_epistemic_status.md` | What was run, what is unverified |
 
-Rendered output: `../../output/pdf/Millennium_Audit_combined.pdf` plus HTML
-and slide decks.
+The current build writes PDF and HTML in the repository's `output/`.
+Use the [publication record](../publication.md) for the version of record.

@@ -3,6 +3,8 @@
 No mocks - every test reads the actual MillenniumLean package under audit.
 """
 import json
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -98,13 +100,10 @@ def test_yang_mills_is_substitution(verdicts):
     assert "forall c m : Real, 0 < c -> m = c -> 0 < m" in CLAY_STATEMENTS["Yang-Mills"].claimed_type_summary
 
 
-def test_ns_and_bsd_are_defs(verdicts):
-    for prob in ("Navier-Stokes", "BSD"):
-        v = next(v for v in verdicts if v.problem == v.problem)  # noqa
-    ns = next(v for v in verdicts if v.problem == "Navier-Stokes")
-    bsd = next(v for v in verdicts if v.problem == "BSD")
-    assert ns.theorem_kind == "def"
-    assert bsd.theorem_kind == "def"
+@pytest.mark.parametrize("problem", ("Navier-Stokes", "BSD"))
+def test_ns_and_bsd_are_defs(verdicts, problem):
+    verdict = next(v for v in verdicts if v.problem == problem)
+    assert verdict.theorem_kind == "def"
 
 
 def test_hodge_is_list_arithmetic(mtext):
@@ -139,6 +138,28 @@ def test_pvsnp_premises(verdicts):
 
 def test_report_json_written():
     report = HERE.parent / "data" / "audit_report.json"
-    if report.exists():
-        data = json.loads(report.read_text())
-        assert all(not v["resolves_clay"] for v in data["verdicts"])
+    data = json.loads(report.read_text())
+    assert {v["problem"] for v in data["verdicts"]} == set(CLAY_STATEMENTS)
+    assert all(not v["resolves_clay"] for v in data["verdicts"])
+
+
+def test_alternate_report_preserves_recorded_audit(tmp_path):
+    script = HERE.parent / "scripts" / "run_audit.py"
+    reference = HERE.parent / "data" / "audit_report.json"
+    recorded = reference.read_bytes()
+    package = shutil.copytree(PKG, tmp_path / "input")
+    output = tmp_path / "alternate.json"
+    command = [sys.executable, str(script), str(package), "--output"]
+
+    subprocess.run([*command, str(output)], check=True, capture_output=True)
+    audit = json.loads(output.read_text())
+    assert {v["problem"] for v in audit["verdicts"]} == set(CLAY_STATEMENTS)
+    attempt = subprocess.run([*command, str(reference)], capture_output=True)
+    assert attempt.returncode == 2
+    assert reference.read_bytes() == recorded
+
+
+def test_quotations_validate_against_the_published_archive():
+    script = HERE.parent / "scripts" / "check_quotations.py"
+    result = subprocess.run([sys.executable, str(script)], check=True, capture_output=True, text=True)
+    assert "failures: 0" in result.stdout

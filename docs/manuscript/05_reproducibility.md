@@ -1,22 +1,20 @@
 # Reproducibility of this audit
 
-Everything re-runs from the repository root:
+Run the source audit, archival quotation check and native tests from the
+repository root. The report goes to a local output file.
 
-    python3 projects/working/Millennium_Audit/scripts/run_audit.py
-    # -> console report + data/audit_report.json (machine-readable)
+```sh
+uv sync --locked
+uv run --locked python scripts/run_audit.py --output output/current-audit-report.json
+uv run --locked python scripts/check_quotations.py
+uv run --locked pytest
+```
 
-    uv run pytest projects/working/Millennium_Audit/tests/
-    # -> 15 real-data tests against the extracted package
-
-    .venv/bin/python -m pytest tests/ -q          # from the project dir
-
-Lean reproduction (receipt: data/BUILD_RECEIPT.md):
-
-    elan toolchain install leanprover/lean4:v4.34.0-rc1
-    # mathlib at pinned rev d0be1efe9afff6119115373bf4ea5abd833b3a95
-    lake exe cache get
-    lake build Tower Millennium
-    lake env lean print_axioms.lean
+The historical Lean build and axiom-footprint receipt is recorded in
+`data/BUILD_RECEIPT.md` for the original archive and its pinned dependencies.
+The current working package has its own toolchain metadata. The repository
+reproduction guide documents both source verification and the pinned
+manuscript build.
 
 Findings: one file each under docs/audit/F01-F22, indexed by docs/audit/
 00_INDEX.md, which also records the quotation-verification receipts (259/259

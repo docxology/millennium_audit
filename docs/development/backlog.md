@@ -1,6 +1,6 @@
-# TODO
+# Development backlog
 
-## Workflowz review — 2026-11-10
+Items and line positions originate in the 2026-11-10 source review. Checked items are implemented in the current checkout.
 
 - [ ] **MA-001 — P1 — Make closed-theorem verdicts evidence-backed rather than unconditionally negative**
   - **Observable outcome:** A final with no recognized premise binders is no longer automatically labeled `OFF_TOPIC_THEOREM` and non-resolving. Preserve the six reviewed findings for the frozen artifact, but represent an unrecognized closed signature as requiring review (or resolve it positively only through an explicit statement-equivalence rule), instead of deriving a negative verdict merely from an empty premise list.
@@ -32,7 +32,7 @@
     The first synthetic case must not produce an unconditional `OFF_TOPIC_THEOREM`; the real frozen package must retain its reviewed Hodge classification.
   - **Dependencies/constraints:** Coordinate with MA-005 because parser facts must remain stable while lexical extraction improves. Do not infer mathematical proof merely from a name, a zero-binder header, or an unchecked string; any positive result requires an explicit, reviewable equivalence decision. Keep all changes outside the verbatim audited package (`AGENTS.md:3-7`).
 
-- [ ] **MA-002 — P1 — Prevent alternate-package audits from clobbering the canonical report**
+- [x] **MA-002 — P1 — Prevent alternate-package audits from clobbering the canonical report**
   - **Observable outcome:** The positional package argument remains supported, but a caller can direct its JSON to a separate `--output` path. An alternate-package run leaves `data/audit_report.json` byte-for-byte unchanged; the documented default invocation still writes the canonical report.
   - **Evidence:** Alternate input is explicitly documented at `scripts/run_audit.py:2-5` and read at `scripts/run_audit.py:24-26`, while `scripts/run_audit.py:81-82` always writes the same tracked path. README's command at `README.md:30-34` provides no separation for results from another package.
   - **Acceptance probe (run from the repository root):**
@@ -55,7 +55,7 @@
     ```
   - **Dependencies/constraints:** Add only orchestration/CLI plumbing; the audited package and its hashes are immutable. Preserve backward compatibility for one positional package path and document the new output option in the run instructions. If output covers a different artifact, retain enough input provenance in the JSON to distinguish it from the canonical report.
 
-- [ ] **MA-003 — P2 — Make the machine-readable report test fail when its required evidence is absent**
+- [x] **MA-003 — P2 — Make the machine-readable report test fail when its required evidence is absent**
   - **Observable outcome:** `test_report_json_written` loads and validates the required report unconditionally rather than silently succeeding on a missing file, while still passing with the checked-in report present.
   - **Evidence:** The entire assertion at `tests/test_audit.py:140-144` is guarded by `if report.exists()`, giving the test a zero-assertion success path. The report is produced only by the separate orchestrator at `scripts/run_audit.py:81-83`, so collection of the tests alone does not guarantee that the file exists.
   - **Acceptance probe (run from the repository root):**
@@ -119,13 +119,13 @@
   - **Acceptance probe (run from the repository root):** Add a temporary end-to-end fixture containing `A.lean` and `B.lean` and one finding whose quote is explicitly assigned to `A.lean`. Put the quoted bytes only at the cited line of `B.lean`, then invoke `python3 scripts/check_quotations.py "$tmp/docs" "$tmp/pkg"` and require exit status 1. Put the bytes at the cited line of `A.lean`, rerun the same CLI, and require status 0. Finally run `python3 scripts/check_quotations.py` against the real docs/package and require its reported failure count to remain zero.
   - **Dependencies/constraints:** First derive source association from existing finding structure where unambiguous; add explicit source metadata only where needed and migrate all current quotes atomically. Preserve support for both quote forms and the CLI's two optional directory arguments. Do not modify quoted package files to satisfy the gate.
 
-- [ ] **MA-007 — P2 — Declare and document the test-runner dependency for a fresh environment**
+- [x] **MA-007 — P2 — Declare and document the test-runner dependency for a fresh environment**
   - **Observable outcome:** A contributor following one documented setup command obtains pytest without installing an undeclared global tool, then can run the complete suite; pytest remains a development-only dependency rather than a runtime dependency of the audit library.
   - **Evidence:** `pyproject.toml:1-6` declares no runtime dependencies, and its complete visible configuration at `pyproject.toml:8-10` only configures rather than declares pytest. Nevertheless `tests/test_audit.py:9` imports it and `tests/test_audit.py:25-37` uses its fixture decorator, while `README.md:30-34` goes directly to `python3 -m pytest` with no installation step.
   - **Acceptance probe (run from the repository root):** In a newly created virtual environment with only the project's documented bootstrap prerequisites, execute the new setup command exactly as written and then run `python3 -m pytest tests/ -q`; setup must provide pytest and all tests must pass. As the runtime-contract check, also run `python3 scripts/run_audit.py --output "$(mktemp)/audit.json"` in an environment without the development group and require success.
   - **Dependencies/constraints:** Choose pytest requirement/lock changes only after inspecting the actual resolver lock; do not invent an upgrade or add pytest to `[project].dependencies`. Preserve `requires-python = ">=3.11"` (`pyproject.toml:5`), the existing pytest configuration, and the Lean toolchain pin. No scientific/deployment constraint in the visible packet justifies changing the Python runtime floor.
 
-- [ ] **MA-008 — P3 — Replace the no-op Navier-Stokes/BSD test loop with independent executable cases**
+- [x] **MA-008 — P3 — Replace the no-op Navier-Stokes/BSD test loop with independent executable cases**
   - **Observable outcome:** Navier-Stokes and BSD each have a separately reported test case asserting `theorem_kind == "def"`; the self-comparing loop and unused loop variable disappear without weakening either assertion.
   - **Evidence:** At `tests/test_audit.py:101-103`, `v.problem == v.problem` is tautological, has no assertion, and the loop body does not use `prob`. The actual checks occur only afterward at `tests/test_audit.py:104-107`, so the loop contributes no validation and obscures the intended two-problem parameterization.
   - **Acceptance probe (run from the repository root):**
