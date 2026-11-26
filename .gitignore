@@ -4,9 +4,10 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 package/MillenniumLean/.lake/
-output/web/
 output/slides/
 output/reports/
+/output/alternate-audit-report.json
+/output/current-audit-report.json
 output/pdf/*_compile.log
 *.olean
 *.ilean

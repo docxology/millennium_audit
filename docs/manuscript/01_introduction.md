@@ -21,11 +21,11 @@ what the types say.
 Three commitments govern everything below.
 
 1. **No kernel fact is disputed.** We reproduce the build and axiom report
-   independently (Section 2; finding F01) and they match the package
+   independently (Methodology and finding F01) and they match the package
    byte-for-byte.
 2. **Every refutation is quote-anchored.** Each of the twenty-two findings
    (docs/audit/F01-F22) quotes the package's own source lines, with file:line
-   verified character-against the extracted tree by a script (292/292 quoted
+   verified against the published package archive by a script (292/292 quoted
    lines verify byte-exact, including the rebuttal pass).
 3. **Genuine content is credited.** Finding F13 itemizes the package's real
    theorems and faithful formalizations; the verdict rests on what is absent,
@@ -33,8 +33,7 @@ Three commitments govern everything below.
 
 ## Reader's guide
 
-Section 2 records the reproduction; Section 3 the audit method; Section 4 the
-per-problem results; Section 5 the cross-cutting findings; Section 6 the
-external record (context only); Section 7 reproducibility of the audit
-itself; Section 8 scope limits. The Epistemic Status paragraph (Section 9)
-states exactly what was run and what remains unverified.
+Methodology records the kernel reproduction and statement audit. Results
+contains the per-problem and cross-cutting findings. Reproducibility gives the
+current commands, Scope and Related Work describes the boundaries, and
+Epistemic Status records the checks and open questions.

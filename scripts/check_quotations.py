@@ -3,22 +3,35 @@
 
 Layer 5 of the audit verification chain (docs/approach/audit-doctrine.md).
 Parses each "> N: text" quote (and bare long quotes) in the audit findings
-and checks line number and text against the extracted package bytes.
+and checks line number and text against the original published package bytes.
 
-Usage: python3 scripts/check_quotations.py [docs/audit] [package/MillenniumLean]
+Usage: python3 scripts/check_quotations.py [docs/audit] [archive.zip or directory]
 Exit 0 iff all quotes verify.
 """
 import re
 import sys
 from pathlib import Path
+from zipfile import ZipFile
 
 HERE = Path(__file__).resolve().parent
 AUDIT_DIR = Path(sys.argv[1]) if len(sys.argv) > 1 else HERE.parent / "docs" / "audit"
-PKG_DIR = Path(sys.argv[2]) if len(sys.argv) > 2 else HERE.parent / "package" / "MillenniumLean"
+PACKAGE = Path(sys.argv[2]) if len(sys.argv) > 2 else HERE.parent / "MillenniumLean_ClayProof_20260901.zip"
+
+
+def read_sources(package: Path) -> tuple[str, ...]:
+    if package.is_dir():
+        return tuple(path.read_text(encoding="utf-8") for path in sorted(package.iterdir()) if path.is_file())
+    with ZipFile(package) as archive:
+        return tuple(
+            archive.read(member).decode("utf-8")
+            for member in archive.infolist()
+            if not member.is_dir()
+        )
 
 
 def main() -> int:
-    srcs = {f.name: f.read_text() for f in sorted(PKG_DIR.iterdir()) if f.is_file()}
+    srcs = read_sources(PACKAGE)
+    source_lines = tuple(text.splitlines() for text in srcs)
     failures: list = []
     total = 0
     for md in sorted(AUDIT_DIR.glob("*.md")):
@@ -31,14 +44,14 @@ def main() -> int:
                 total += 1
                 ln, txt = int(m.group(1)), m.group(2)
                 ok = any(
-                    0 < ln <= len(t.splitlines()) and t.splitlines()[ln - 1] == txt
-                    for t in srcs.values()
+                    0 < ln <= len(lines) and lines[ln - 1] == txt
+                    for lines in source_lines
                 )
                 if not ok:
                     failures.append((md.name, i, ln, txt[:80]))
             elif len(q) >= 15 and "..." not in q:  # bare quote: substring match
                 total += 1
-                if not any(q in t for t in srcs.values()):
+                if not any(q in t for t in srcs):
                     failures.append((md.name, i, "-", q[:80]))
     print(f"checked {total} quoted lines; failures: {len(failures)}")
     for f in failures:

@@ -1,0 +1,16 @@
+claims:
+  - claim_id: archived-quotation-lines
+    kind: number
+    value: 292
+    artifact_path: MillenniumLean_ClayProof_20260901.zip
+    source: "Measured with scripts/check_quotations.py against the published archive and the findings, including the rebuttal pass."
+  - claim_id: millennium-lean-declarations
+    kind: number
+    value: 32
+    artifact_path: MillenniumLean_ClayProof_20260901.zip
+    source: "Count of recognized declarations in the archive member MillenniumLean/Millennium.lean."
+  - claim_id: tower-lean-declarations
+    kind: number
+    value: 9
+    artifact_path: MillenniumLean_ClayProof_20260901.zip
+    source: "Count of recognized declarations in the archive member MillenniumLean/Tower.lean."

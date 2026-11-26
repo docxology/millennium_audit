@@ -18,19 +18,16 @@ cited file:line anchors.
 ## Limitations
 
 - The mathlib clone was shallow at the pinned revision (provenance
-  decoration only; see Section 2).
+  decoration only, as described in Methodology).
 - Fairness of classification: CONDITIONAL_IMPLICATION vs OFF_TOPIC_THEOREM
   is a judgment call for edge cases; for this package every classification
   is over-determined (e.g. Yang-Mills is both conditional AND its type is
   bare substitution).
-- We audited the 20260901 zip as published; a newer revision could differ
-  (none was available on Zenodo as of the audit date).
+- The audit concerns the published archive `MillenniumLean_ClayProof_20260901.zip`.
 
 ## Related work
 
-- lean-dojo/LeanMillenniumPrizeProblems - reference formalizations of all
-  seven problems, marked Open.
-- DavidFox998/opera-numerorum - 664 verified Lean "bricks" with an explicit
-  honesty statement that no Clay problem is solved.
-- postquantum.com's detailed critique of the companion FTQC paper.
-These agree with, but are not load-bearing for, the present verdict.
+- LeanMillenniumPrizeProblems provides reference formalizations [@leandojo].
+- Opera Numerorum provides examples of theorems verified in Lean. [Project source](https://github.com/DavidFox998/opera-numerorum)
+- PostQuantum discusses the companion FTQC paper [@postquantum2026].
+The verdict relies on the audited package and its theorem types.

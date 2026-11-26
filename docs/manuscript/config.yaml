@@ -21,3 +21,10 @@ keywords:
 metadata:
   license: "MIT"
   language: "en"
+render:
+  formats:
+    pdf: true
+    html: true
+    slides: false
+    docx: false
+    epub: false

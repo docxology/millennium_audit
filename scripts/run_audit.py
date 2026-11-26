@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Thin orchestrator: run the full Millennium_Audit and print the report.
+"""Run the MillenniumLean source audit and write its report."""
 
-Usage: python3 scripts/run_audit.py [path/to/MillenniumLean]
-"""
+import argparse
 import json
+import os
 import sys
 from pathlib import Path
+from tempfile import NamedTemporaryFile
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "src"))
@@ -19,10 +20,22 @@ from clay_statements import CLAY_STATEMENTS    # noqa: E402
 from verdicts import VERDICTS                  # noqa: E402
 
 DEFAULT_PKG = HERE.parent / "package" / "MillenniumLean"
+DEFAULT_REPORT = HERE.parent / "data" / "audit_report.json"
 
 
 def main() -> int:
-    pkg = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_PKG
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("package", nargs="?", type=Path, default=DEFAULT_PKG)
+    parser.add_argument("--output", type=Path, help="Path for the report JSON.")
+    args = parser.parse_args()
+    pkg = args.package
+    is_reference = pkg.resolve() == DEFAULT_PKG.resolve()
+    out_path = args.output
+    if out_path is None:
+        out_path = DEFAULT_REPORT if is_reference else HERE.parent / "output" / "alternate-audit-report.json"
+    if not is_reference and out_path.resolve() == DEFAULT_REPORT.resolve():
+        parser.error("Choose a separate report path for an alternate package.")
+
     store = EvidenceStore(pkg)
     mtext = store.read("Millennium.lean")
     ttext = store.read("Tower.lean")
@@ -78,8 +91,14 @@ def main() -> int:
         ],
         "headline": VERDICTS["headline"],
     }
-    out_path = HERE.parent / "data" / "audit_report.json"
-    out_path.write_text(json.dumps(out, indent=2))
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = NamedTemporaryFile(mode="w", encoding="utf-8", dir=out_path.parent, delete=False)
+    try:
+        with temporary:
+            json.dump(out, temporary, indent=2)
+        os.replace(temporary.name, out_path)
+    finally:
+        Path(temporary.name).unlink(missing_ok=True)
     print(f"\nWrote {out_path}")
     return 0
 

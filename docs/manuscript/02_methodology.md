@@ -44,18 +44,17 @@ reproduces.
 
 ## Verification of the audit itself
 
-All fifteen test files in tests/ assert audit facts against the real package
-bytes (no mocks; 15/15 pass). All 259 line-anchored quotations in
-docs/audit/*.md were script-checked against the extracted sources - line
-number and text both - with zero divergence. An earlier draft failed this
-check (51 divergences from Unicode normalization); all quote blocks were
+The published audit's fifteen tests exercised the package bytes. Its initial
+quotation check matched 259 numbered lines to the original archive. The
+checker now includes the rebuttal findings, for 292 matches. An earlier draft
+had 51 divergences from Unicode normalization. The quote blocks were
 rebuilt programmatically from the package bytes and re-verified. The
 failure-and-fix is disclosed in docs/audit/00_INDEX.md.
 
 ## Line-by-line verification of the package (whole-file)
 
-- Millennium.lean (404 lines): read verbatim; 35 declarations.
-- Tower.lean (30 lines): read verbatim; 6 declarations + 3 #print commands.
+- `Millennium.lean` (404 lines): read verbatim. The source parser recognizes 32 declarations.
+- `Tower.lean` (30 lines): read verbatim. The source parser recognizes 9 declarations.
 - audit.py (69 lines): executed; parsing logic reviewed line-by-line.
 - PROOF_CERTIFICATE.md (105 lines), WHY_THIS_IS_PROOF.md (70 lines),
   README.md (167 lines): read verbatim; every checkable claim traced to a
