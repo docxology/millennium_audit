@@ -5,21 +5,23 @@ argument handling, logging/printing, and a single delegated call into
 `../src/` entrypoints. No business/data/analysis logic here; anything
 reusable belongs in `../src/` with tests in `../tests/`.
 
-Inventory (complete for this directory):
+## Audit commands
 
-- `run_audit.py` - full audit pipeline: inserts `../src/` on `sys.path`,
-  delegates to `evidence`, `lean_parser`, `statement_audit`,
-  `clay_statements`, `verdicts`; writes `../data/audit_report.json`.
-- `check_quotations.py` - Layer 5 quotation gate
-  (docs/approach/audit-doctrine.md): checks every `> N: text` and bare
-  quote in `../docs/audit/*.md` byte-exact against
-  `../package/MillenniumLean`; self-contained, no `src/` imports.
+Run from the repository root. See the [command reference](../docs/reference/commands.md)
+for the supported arguments.
 
-Gotchas:
+- `run_audit.py` audits the tracked `package/MillenniumLean/` by default.
+  It accepts an optional package path and `--output`. Use
+  `uv run --locked python scripts/run_audit.py --output output/current-audit-report.json`
+  for a fresh report alongside the committed reference. With the tracked package
+  and no output argument, it writes `data/audit_report.json`. The runner uses
+  `output/alternate-audit-report.json` for alternate inputs without a supplied
+  output path and rejects the recorded destination for those inputs.
+- `check_quotations.py` checks numbered source lines and eligible bare excerpts
+  in `docs/audit/` against `MillenniumLean_ClayProof_20260901.zip` by default.
+  It accepts an optional positional findings directory followed by a source ZIP
+  or directory. Exit 1 reports quotation mismatches.
 
-- `run_audit.py` inserts `../src/` on `sys.path` by design (project-local
-  import, no package installation).
-- Both scripts take optional positional args, not flags (no `--help`);
-  paths default relative to the script location, so they run from anywhere.
-- `check_quotations.py` exit 1 means a doc quote no longer matches the
-  extracted package bytes; reconcile the doc or the extraction, not the gate.
+The source runner imports the local `src/` modules. The quotation checker
+reads the selected source directly. See the [test guide](../tests/README.md)
+for the locked test command.
